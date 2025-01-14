@@ -1,0 +1,33 @@
+---
+title: "Reproducible Document"
+author: "Aylin S. Guller"
+format: html
+---
+
+## Basics of R
+
+```{r}
+1 + 1
+```
+
+## Setup code chunk 
+
+```{r setup}
+library(tidyverse)
+
+
+```
+## About me 
+
+- Southern Denmark university 
+- **phd student**
+- *in molecular biology*
+
+## Simple Code
+
+```{r}
+
+3*3
+```
+
+
