@@ -10,13 +10,6 @@ format: html
 1 + 1
 ```
 
-## Setup code chunk 
-
-```{r setup}
-library(tidyverse)
-
-
-```
 ## About me 
 
 - Southern Denmark university 
@@ -36,7 +29,9 @@ cold
 
 ## Setup code chunk 
 
-```{r}
+```{r setup}
+#| message: false
+#| warning: false
 library(tidyverse)
 post_meal_data <- read.csv2(here::here("data/post-meal-insulin.csv"))
 
