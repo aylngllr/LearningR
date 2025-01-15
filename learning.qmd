@@ -33,6 +33,8 @@ cold
 #| warning: false
 library(tidyverse)
 post_meal_data <- read.csv2(here::here("data/post-meal-insulin.csv"))
+
+small_post_meal_data <- select( post_meal_data,id, Age, BMI, Group, auc_pg, auc_ins, glykemi)
 ```
 ## Showing the data
 
@@ -126,3 +128,19 @@ check out the @fig-bmi-auc-pg
 
 
 ## Pulling changes locally 
+
+## Selecting data
+```{r}
+select(post_meal_data, Age)
+
+select(post_meal_data, Age, BMI, Weight)
+
+select(post_meal_data, -Group)
+
+select(post_meal_data, starts_with("PG"))
+select(post_meal_data, ends_with("DXA"))
+select(post_meal_data, contains("0"))
+
+
+```
+
