@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>post_meal_data <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/post-meal-insulin.csv"</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>small_post_meal_data <span class="ot">&lt;-</span> <span class="fu">select</span>( post_meal_data,id, Age, BMI, Group, auc_pg, auc_ins, glykemi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>small_post_meal_data <span class="ot">&lt;-</span> <span class="fu">select</span>(post_meal_data, id, Age, BMI, Group, auc_pg, auc_ins, glykemi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="showing-the-data" class="level2">
@@ -795,8 +795,8 @@ Figure&nbsp;3: BMI and groups, side. by side
 <section id="plotting-two-continuous-variables" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-two-continuous-variables">Plotting two continuous variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(post_meal_data, <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> auc_pg)) <span class="sc">+</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(post_meal_data, <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> auc_pg)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
@@ -1546,6 +1546,84 @@ Figure&nbsp;4: scatterplot of BMI versus AUC pf blood glucose
 29  319.4700   125.0100
 30  159.7350    69.4500
 31  152.7900   416.7000</code></pre>
+</div>
+</div>
+<p>##Renaming spesific columns</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>small_post_meal_data <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">auc_glucose =</span> auc_pg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id Age  BMI Group auc_glucose  auc_ins glykemi
+1   1  50 27.5   FDR      805.55 28728.44       0
+2   2  51 33.7   FDR      944.20 42242.96       0
+3   3  43 26.3   FDR      693.95  7107.86       0
+4   4  55 25.9   FDR      731.15 37592.94       0
+5   5  53 29.4   FDR     1003.75 33862.78       0
+6   6  51 23.7   FDR      712.80 15008.49       0
+7   7  48 23.9   FDR      965.15 23195.61       0
+8   8  35 22.0   FDR      741.25 15272.06       0
+9   9  54 26.4   FDR      847.55 24425.91       0
+10 10  52 24.5   FDR      758.75 22475.41       0
+11 11  47 27.9   FDR      764.30 23176.16       0
+12 12  37 22.6   FDR      791.10 30320.13       0
+13 13  55 22.2   FDR     1152.50 32424.47       0
+14 14  35 24.6   FDR      625.85 30905.94       0
+15 15  48 24.7   FDR      911.70 18431.68       1
+16 16  52 27.5   FDR      824.20 36487.29       0
+17 17  51 29.7   CTR      834.25 39020.48       0
+18 18  51 21.2   CTR      787.30 12342.65       0
+19 19  30 33.4   CTR      956.30 47198.22       1
+20 20  46 30.7   CTR      811.40 43320.13       1
+21 21  34 28.7   CTR      719.75 24707.88       0
+22 22  51 30.5   CTR      959.05 53491.78       1
+23 23  53 28.9   CTR      773.40 24245.69       0
+24 24  36 26.2   CTR      678.30 16162.06       0
+25 25  30 21.2   CTR      734.60 23829.68       0
+26 26  35 25.1   CTR      822.95 19637.33       0
+27 27  37 27.8   CTR      841.60 21189.19       0
+28 28  49 20.2   CTR      757.30 17985.12       0
+29 29  40 31.8   CTR      782.80 29643.69       0
+30 30  34 20.8   CTR      762.80 16590.56       0
+31 31  33 27.4   CTR      786.15 43336.80       0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>small_post_meal_data <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">auc_glucose =</span> auc_pg,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">auc_insulin =</span> auc_ins</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id Age  BMI Group auc_glucose auc_insulin glykemi
+1   1  50 27.5   FDR      805.55    28728.44       0
+2   2  51 33.7   FDR      944.20    42242.96       0
+3   3  43 26.3   FDR      693.95     7107.86       0
+4   4  55 25.9   FDR      731.15    37592.94       0
+5   5  53 29.4   FDR     1003.75    33862.78       0
+6   6  51 23.7   FDR      712.80    15008.49       0
+7   7  48 23.9   FDR      965.15    23195.61       0
+8   8  35 22.0   FDR      741.25    15272.06       0
+9   9  54 26.4   FDR      847.55    24425.91       0
+10 10  52 24.5   FDR      758.75    22475.41       0
+11 11  47 27.9   FDR      764.30    23176.16       0
+12 12  37 22.6   FDR      791.10    30320.13       0
+13 13  55 22.2   FDR     1152.50    32424.47       0
+14 14  35 24.6   FDR      625.85    30905.94       0
+15 15  48 24.7   FDR      911.70    18431.68       1
+16 16  52 27.5   FDR      824.20    36487.29       0
+17 17  51 29.7   CTR      834.25    39020.48       0
+18 18  51 21.2   CTR      787.30    12342.65       0
+19 19  30 33.4   CTR      956.30    47198.22       1
+20 20  46 30.7   CTR      811.40    43320.13       1
+21 21  34 28.7   CTR      719.75    24707.88       0
+22 22  51 30.5   CTR      959.05    53491.78       1
+23 23  53 28.9   CTR      773.40    24245.69       0
+24 24  36 26.2   CTR      678.30    16162.06       0
+25 25  30 21.2   CTR      734.60    23829.68       0
+26 26  35 25.1   CTR      822.95    19637.33       0
+27 27  37 27.8   CTR      841.60    21189.19       0
+28 28  49 20.2   CTR      757.30    17985.12       0
+29 29  40 31.8   CTR      782.80    29643.69       0
+30 30  34 20.8   CTR      762.80    16590.56       0
+31 31  33 27.4   CTR      786.15    43336.80       0</code></pre>
 </div>
 </div>
 </section>
