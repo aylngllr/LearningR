@@ -70,3 +70,50 @@ ggplot(post_meal_data, aes( x = Group)) +
 
 See @fig-group-bar above for a cool plot!
 
+```{r}
+post_meal_data |>
+  ggplot(aes(x = Group, fill = glykemi)) + 
+  geom_bar()
+```
+
+```{r}
+post_meal_data |>
+  ggplot(aes(x = Group, fill = as.character(glykemi))) + 
+  geom_bar()
+
+```
+
+```{r}
+post_meal_data |>
+  ggplot(aes(x = Group, fill = as.character(glykemi))) + 
+  geom_bar(position = position_dodge())
+
+```
+## Putting two plots side by side 
+
+```{r}
+ggplot(post_meal_data, aes( x = BMI)) + 
+  geom_histogram()
+```
+
+```{r}
+ggplot(post_meal_data, aes( x = Group)) +
+  geom_bar()
+```
+
+```{r side-by-side-figs}
+#| label: fig-bmi-group
+#| fig-cap: "BMI and groups, side. by side"
+#| fig-subcap: 
+#| - "Distribiton of BMI"
+#| - "Groups"
+#| layout-ncol: 2
+
+ggplot(post_meal_data, aes( x = BMI)) + 
+  geom_histogram()
+
+ggplot(post_meal_data, aes( x = Group)) +
+  geom_bar()
+
+```
+
