@@ -121,3 +121,5 @@ ggplot(post_meal_data, aes(x = BMI, y = auc_pg)) +
   geom_smooth()
 ```
 check out the @fig-bmi-auc-pg
+
+## Pushing changes to remote 
