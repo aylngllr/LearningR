@@ -19,8 +19,7 @@ format: html
 ## Simple Code
 
 ```{r}
-
-3*3
+3 * 3
 ```
 
 ## Testing of Git
@@ -34,13 +33,11 @@ cold
 #| warning: false
 library(tidyverse)
 post_meal_data <- read.csv2(here::here("data/post-meal-insulin.csv"))
-
 ```
 ## Showing the data
 
 ```{r}
 post_meal_data
-
 ```
 
 ```{r}
@@ -48,15 +45,14 @@ glimpse(post_meal_data)
 ```
 
 ```{r}
-ggplot(post_meal_data, aes( x = BMI)) + 
+ggplot(post_meal_data, aes(x = BMI)) +
   geom_histogram()
 ```
 ```{r}
 #| fig-cap: "Distribution of BMI"
 #| label: fig-bmi-histo
-ggplot(post_meal_data, aes( x = BMI)) + 
+ggplot(post_meal_data, aes(x = BMI)) +
   geom_histogram()
-
 ```
 
 ## Exercise: discrete plots
@@ -64,7 +60,7 @@ ggplot(post_meal_data, aes( x = BMI)) +
 ```{r}
 #| fig-cap: "groups"
 #| label: fig-group-bar
-ggplot(post_meal_data, aes( x = Group)) +
+ggplot(post_meal_data, aes(x = Group)) +
   geom_bar()
 ```
 
@@ -72,48 +68,56 @@ See @fig-group-bar above for a cool plot!
 
 ```{r}
 post_meal_data |>
-  ggplot(aes(x = Group, fill = glykemi)) + 
+  ggplot(aes(x = Group, fill = glykemi)) +
   geom_bar()
 ```
 
 ```{r}
 post_meal_data |>
-  ggplot(aes(x = Group, fill = as.character(glykemi))) + 
+  ggplot(aes(x = Group, fill = as.character(glykemi))) +
   geom_bar()
-
 ```
 
 ```{r}
 post_meal_data |>
-  ggplot(aes(x = Group, fill = as.character(glykemi))) + 
+  ggplot(aes(x = Group, fill = as.character(glykemi))) +
   geom_bar(position = position_dodge())
-
 ```
 ## Putting two plots side by side 
 
 ```{r}
-ggplot(post_meal_data, aes( x = BMI)) + 
+ggplot(post_meal_data, aes(x = BMI)) +
   geom_histogram()
 ```
 
 ```{r}
-ggplot(post_meal_data, aes( x = Group)) +
+ggplot(post_meal_data, aes(x = Group)) +
   geom_bar()
 ```
 
 ```{r side-by-side-figs}
 #| label: fig-bmi-group
 #| fig-cap: "BMI and groups, side. by side"
-#| fig-subcap: 
+#| fig-subcap:
 #| - "Distribiton of BMI"
 #| - "Groups"
 #| layout-ncol: 2
 
-ggplot(post_meal_data, aes( x = BMI)) + 
+ggplot(post_meal_data, aes(x = BMI)) +
   geom_histogram()
 
-ggplot(post_meal_data, aes( x = Group)) +
+ggplot(post_meal_data, aes(x = Group)) +
   geom_bar()
+```
 
+
+## Plotting two continuous variables 
+
+```{r}
+#| fig-cap: "scatterplot of BMI versus AUC pf blood glucose "
+#| label: fig-bmi-auc-pg 
+ggplot(post_meal_data, aes(x = BMI, y = auc_pg)) + 
+  geom_point() + 
+  geom_smooth()
 ```
 
