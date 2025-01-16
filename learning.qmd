@@ -43,6 +43,12 @@ tidier_post_meal_data <- small_post_meal_data |>
   ) |>
   filter(glykemi == 0) |>
   select(-glykemi)
+
+tidier_post_meal_data <- tidier_post_meal_data |>
+  mutate(
+    insulin_glucose_ratio = auc_insulin / auc_glucose,
+    Group = if_else(Group == "CTR", "Control", "First-degree relative")
+  )
 ```
 ## Showing the data
 
@@ -219,3 +225,49 @@ tidier_post_meal_data |>
     Group = if_else(Group == "CTR", "CTRL", "First-degree relative")
   )
 ```
+
+
+## Practise with filter and mutate
+
+```{r}
+# Task 1.
+post_meal_data |>
+  filter(BMI >= 20 & BMI <= 40 & Group == "FDR")
+
+# Task 2.
+post_meal_data |>
+  mutate(
+    percent_body_fat = (Fat.mass.DXA / Weight) * 100
+  ) |>
+  filter(percent_body_fat > 30)
+```
+
+
+## Visualizing with jitter plot
+```{r}
+tidier_post_meal_data |>
+  mutate( overweight = if_else( BMI >= 25, "overweight", "Not overweight")) |>
+  ggplot( aes( x = overweight, y = insulin_glucose_ratio)) + geom_jitter()
+```
+
+```{r}
+tidier_post_meal_data |>
+  filter(BMI < 30) |>
+  ggplot( aes(x= Age, y= auc_insulin, color = Group)) + geom_point()
+
+
+```
+
+```{r}
+tidier_post_meal_data |>
+  filter(BMI < 30) |>
+  mutate(young = if_else(Age < 40, "Young", "Old")) |>
+  ggplot(aes( x = BMI, y = insulin_glucose_ratio, colour = Group )) + 
+  geom_point() + 
+  facet_grid( rows = vars (young)) +
+  labs(
+    x = "Body mass index (BMI)",
+    y = "Insulin to glucose ratio"
+  )
+```
+
