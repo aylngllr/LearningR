@@ -301,5 +301,44 @@ post_meal_data |>
   geom_smooth() +
   facet_grid(cols = vars(insulin_insensitive))
 ```
+
+
+## Changing colors
+```{r}
+# Tasks 1. and 2.
+post_meal_data |>
+  mutate(hyperglycemia = if_else(glykemi == 1, "Yes", "No")) |>
+  ggplot(aes(x = Group, fill = hyperglycemia)) +
+  geom_bar(position = position_dodge()) +
+  scale_fill_viridis_d()
+# scale_fill_viridis_d(option = "magma")
+
+# Tasks 3. and 4.
+post_meal_data |>
+  ggplot(aes(x = auc_pg, y = auc_ins, colour = BMI)) +
+  geom_point() +
+  scale_colour_viridis_c()
+# scale_colour_viridis_c(option = "inferno")
+
+```
+
+
+
+## Calculating Summary statistics
+
+```{r}
+tidier_post_meal_data |>
+  summarise(max_bmi = max(BMI) , 
+            min_bmi = min(BMI))
+```
+## Summarize with splitting
+
+
+```{r}
+tidier_post_meal_data |>
+  group_by(Group) |>
+  summarise(mean_age = mean(Age), 
+            mean_bmi = mean(BMI)) |>
+  ungroup()
 ```
 
